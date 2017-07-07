@@ -23,8 +23,24 @@ for f in files:
             .append(df)
             .reset_index(drop=True))
 
-cmpl_df = data[~data["Number:"].isnull()]
-inv_df = data[data["Number:"].isnull()]
+data.insert(0, "CRID", (data["Number:"]
+                        .fillna(method='ffill')
+                        .astype(int)))
+
+cmpl_df = (data[~data["Number:"].isnull()]
+            .dropna(how='all', axis=0)
+            .dropna(how='all',axis=1)
+            .drop('Number:', axis=1))
+
+cmpl_df.columns = ["CRID", "Beat", "Location_Code", "Address_Number", "Street", "Apartment_Number", "City_State", "Incident_Datetime", "Complaint_Date", "Closed_Date"]
 
 cmpl_df.to_csv("../output/" + "complaints.csv" , index = False)
+
+inv_df = (data[data["Number:"].isnull()]
+            .dropna(how='all', axis=0)
+            .dropna(how='all',axis=1)
+            .drop('Beat:', axis=1))
+
+inv_df.columns = ["CRID", "Full_Name", "Assignment", "Rank", "Star", "Appointed_Datetime"]
+
 inv_df.to_csv("../output/" + "investigators.csv" , index = False)

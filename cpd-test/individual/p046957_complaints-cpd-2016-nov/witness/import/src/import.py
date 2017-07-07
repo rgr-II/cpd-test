@@ -12,13 +12,12 @@ input_path = '../input/'
 f = input_path + os.listdir(input_path)[0]
 
 df = ReadMessy(f, add_skip=0)
-# Add a way to automatically assign column names
-df['CRID'] = (pd.to_numeric(df['Gender'], errors='coerce')
+df.insert(0,"CRID",(pd.to_numeric(df['Gender'], errors='coerce')
                 .fillna(method='ffill')
-                .astype(int))
-print(df.columns)
-df = (df[df['Gender'] != df['CRID'].astype(str)]
-        .dropna(thresh = len(df.columns.values)-1)
+                .astype(int)))
+df = (df[df['Gender']!=df['CRID'].astype(str)]
+        .dropna(thresh=len(df.columns.values)-1)
         .reset_index(drop=True))
-print(df.head(10))
+df.columns = ["CRID", "Full_Name", "Gender", "Race", "Star", "Birth_Year", "Appointed_Date"]
 
+df.to_csv("../output/witness.csv")

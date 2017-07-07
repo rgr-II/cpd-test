@@ -24,5 +24,5 @@ for f in files:
     data = (data
             .append(df)
             .reset_index(drop=True))
-
+data.columns = ["CRID", "Full_Name", "Birth_Year", "Gender", "Race", "Appointed_Date", "Current_Unit", "Current_Rank", "Star","Complaint_Category", "Recommended_Finding", "Recommended_Discipline", "Final_Finding", "Final_Discipline"]
 data.to_csv("../output/accused.csv", index=False)
