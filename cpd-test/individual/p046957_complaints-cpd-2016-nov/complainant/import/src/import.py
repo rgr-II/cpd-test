@@ -7,13 +7,18 @@ module_path = os.path.abspath(os.path.join('../../../../../tools/'))
 if module_path not in sys.path: sys.path.append(module_path)
 
 from helperfunctions import *
+from utils import *
 
 input_path = "../input/"
+out_path = "../output/"
+out_file = "complainants.csv"
 
 files = [input_path + f for f in os.listdir(input_path)]
-data = pd.DataFrame()
 
-for f in files[:1]:
+data = pd.DataFrame()
+metadata = pd.DataFrame()
+
+for f in files:
     df = ReadMessy(f)
     df.insert(0, 'CRID', (df['Number']
                             .fillna(method='ffill')
@@ -21,8 +26,14 @@ for f in files[:1]:
     df = (df
             .dropna(thresh = len(df.columns.values)-1, axis=0)
             .drop("Number", axis = 1))
-
+    df.columns = ["CRID", "Gender","Age", "Race"]
+    
     data = (data
             .append(df)
             .reset_index(drop=True))
-data.to_csv("../output/victim.csv", index = False)
+    metadata = (metadata
+                .append(metadata_dataset(df, f, out_file))
+                .reset_index(drop=True))
+
+data.to_csv(out_path + out_file, index = False)
+metadata.to_csv(out_path + "metadata_" + out_file, index=False)
