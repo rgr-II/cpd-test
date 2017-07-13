@@ -10,5 +10,7 @@ from CleaningFunctions import *
 
 input_path = "../input/"
 out_path = "../output/"
-df = pd.read_csv(input_path + "investigators.csv")
-CleanData(df, int_cols = ["Star", "Assignment"]).to_csv(out_path + 'investigators.csv')
+
+df = pd.read_csv(input_path + "witnesses.csv")
+df.loc[df['Race'] == 'WBH', 'Race'] = 'WWH'
+CleanData(df, int_cols = ["Start", "Birth_Year"]).to_csv(out_path + 'witnesses.csv')
