@@ -11,5 +11,5 @@ from CleaningFunctions import *
 input_path = "../input/"
 out_path = "../output/"
 
-df = pd.read_csv(input_path + "accused.csv")
-CleanData(df).to_csv(out_path + 'accused.csv')
+df = pd.read_csv(input_path + "complainants.csv")
+CleanData(df).to_csv(out_path + 'complainants.csv')

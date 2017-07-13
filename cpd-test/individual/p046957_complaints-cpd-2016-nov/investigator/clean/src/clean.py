@@ -10,6 +10,6 @@ from CleaningFunctions import *
 
 input_path = "../input/"
 out_path = "../output/"
-
-df = pd.read_csv(input_path + "accused.csv")
-CleanData(df).to_csv(out_path + 'accused.csv')
+df = pd.read_csv(input_path + "investigators.csv")
+print(CleanData(df))
+#CleanData(df).to_csv(out_path + 'investigators.csv')
