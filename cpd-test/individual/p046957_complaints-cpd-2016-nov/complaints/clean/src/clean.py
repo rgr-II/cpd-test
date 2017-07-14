@@ -12,4 +12,4 @@ input_path = "../input/"
 out_path = "../output/"
 
 df = pd.read_csv(input_path + "complaints.csv")
-CleanData(df).to_csv(out_path + 'complaints.csv')
+CleanData(df).to_csv(out_path + 'complaints.csv', index = False)
