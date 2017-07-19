@@ -3,11 +3,7 @@ import numpy as np
 import os
 import sys
 
-module_path = os.path.abspath(os.path.join('../../../../../tools/'))
-if module_path not in sys.path: sys.path.append(module_path)
-
-from helperfunctions import *
-from utils import *
+from ImportFunctions import *
 
 input_path = '../input/'
 out_path = '../output/'

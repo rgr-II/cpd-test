@@ -3,11 +3,8 @@ import numpy as np
 import os
 import sys
 
-module_path = os.path.abspath(os.path.join('../../../../../tools/'))
-if module_path not in sys.path: sys.path.append(module_path)
+from ImportFunctions import *
 
-from helperfunctions import *
-from utils import *
 input_path = "../input/"
 out_path = "../output/"
 out_file = "accused.csv"
@@ -24,7 +21,7 @@ for f in files:
                             .astype(int)))
     df = (df.drop("Number:", axis=1)
             .dropna(thresh = len(df.columns.values)-1))
-    df.columns = ["CRID", "Full_Name", "Birth_Year", "Gender", "Race", "Appointed_Date", "Current_Unit", "Current_Rank", "Star","Complaint_Category", "Recommended_Finding", "Recommended_Discipline", "Final_Finding", "Final_Discipline"]
+    df.columns = ["CRID", "Full.Name", "Birth.Year", "Gender", "Race", "Appointed.Date", "Current.Unit", "Current.Rank", "Star","Complaint.Category", "Recommended.Finding", "Recommended.Discipline", "Final.Finding", "Final.Discipline"]
     
     data = (data
             .append(df)

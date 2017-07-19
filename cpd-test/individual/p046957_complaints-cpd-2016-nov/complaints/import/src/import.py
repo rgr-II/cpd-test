@@ -6,14 +6,12 @@ from operator import itemgetter
 import datetime
 import itertools
 
-module_path = os.path.abspath(os.path.join('../../../../../tools/'))
-if module_path not in sys.path: sys.path.append(module_path)
-from helperfunctions import *
-from utils import *
+from ImportFunctions import *
 
 input_path = "../input/"
 out_path = "../output/"
 outname = "complaints.csv"
+
 files = [input_path + f for f in os.listdir(input_path)]
 
 cmpl_data = pd.DataFrame()
@@ -34,7 +32,7 @@ for f in files:
                 .dropna(how='all',axis=1)
                 .drop('Number:', axis=1))
 
-    cmpl_df.columns = ["CRID", "Beat", "Location_Code", "Address_Number", "Street", "Apartment_Number", "City_State", "Incident_Datetime", "Complaint_Date", "Closed_Date"]
+    cmpl_df.columns = ["CRID", "Beat", "Location.Code", "Address.Number", "Street", "Apartment.Number", "City.State", "Incident.Datetime", "Complaint.Date", "Closed.Date"]
     cmpl_data = (cmpl_data
                     .append(cmpl_df)
                     .reset_index(drop=True))
@@ -48,7 +46,7 @@ for f in files:
                 .dropna(how='all', axis=0)
                 .dropna(how='all',axis=1)
                 .drop('Beat:', axis=1))
-    inv_df.columns = ["CRID", "Full_Name", "Assignment", "Rank", "Star", "Appointed_Datetime"]
+    inv_df.columns = ["CRID", "Full.Name", "Assignment", "Rank", "Star", "Appointed.Date"]
     inv_data = (inv_data
                     .append(inv_df)
                     .reset_index(drop=True))

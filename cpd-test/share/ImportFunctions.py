@@ -23,6 +23,18 @@ def ReadMessy(path, add_skip=1):
 
     return df
 
+def CorrectColumns(cols):
+    try:
+        col_df = pd.read_csv("Column_Dictionary.csv")
+    except:
+        print("Column_Dictionary not in directory.")
+        col_df = pd.DataFrame()
+    if not isinstance(cols, list):
+        cols = cols.tolist()
+    col_dict = dict(zip(col_df.ix[:,0], col_df.ix[:,1]))
+    new_cols = [col_dict[col] for col in cols]
+    return new_cols
+
 def metadata_dataset(df,infile, outfile, notes = 0):
     buf = io.StringIO()
     df.info(buf=buf)
