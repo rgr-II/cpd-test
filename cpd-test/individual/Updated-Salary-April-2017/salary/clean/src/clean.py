@@ -3,8 +3,9 @@ import os
 
 from CleaningFunctions import *
 
-files = ['../input/' + f for f in os.listdir('../input/')]
+f = '../input/' + os.listdir('../input/')[0]
 
-for f in files[:1]:
-    df = pd.read_csv(f)
-    df = CleanData(df)
+df = pd.read_csv(f)
+df = CleanData(df)
+
+df.to_csv('../output/salary.csv', index=False)
